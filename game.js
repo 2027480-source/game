@@ -21,61 +21,73 @@ let player = {
 
 let keys = {};
 
-// Hair Grids (3x10 overlay for top of head)
-// Values match color hex codes
+// ---------------------------------------------------------
+// NEW & IMPROVED HAIR GRIDS (5x10 to cover the whole head!)
+// ---------------------------------------------------------
 const hairLayouts = {
     dreads_black: {
         color: '#111111',
         grid: [
-            [1,1,1,1,1,1,1,1,1,1],
-            [1,0,1,1,1,1,1,1,0,1],
-            [1,0,1,0,0,0,0,1,0,1]
+            [0,0,1,1,1,1,1,1,0,0],
+            [0,1,1,1,1,1,1,1,1,0],
+            [1,1,0,0,0,0,0,0,1,1],
+            [1,1,0,0,0,0,0,0,1,1], // Dreads hanging down
+            [1,0,0,0,0,0,0,0,0,1]
         ]
     },
     short_red: {
         color: '#cc2200',
-        grid: [
-            [0,0,1,1,1,1,1,1,0,0],
-            [0,1,1,1,1,1,1,1,1,0],
-            [1,1,0,0,0,0,0,0,1,1]
+        grid: [ // Spiky top!
+            [0,1,0,1,0,1,0,1,0,0],
+            [1,1,1,1,1,1,1,1,1,0],
+            [0,1,1,0,0,0,0,1,1,0],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0]
         ]
     },
     short_blonde: {
         color: '#e6c200',
-        grid: [
-            [0,0,1,1,1,1,1,1,0,0],
-            [0,1,1,1,1,1,1,1,1,0],
-            [1,1,0,0,0,0,0,0,1,1]
+        grid: [ // Side part / swoop
+            [0,0,0,1,1,1,1,0,0,0],
+            [0,0,1,1,1,1,1,1,1,0],
+            [0,1,1,1,0,0,0,0,1,0],
+            [0,1,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0]
         ]
     },
     buzz_darkbrown: {
         color: '#2b1d0c',
-        grid: [
+        grid: [ // Barely there
+            [0,0,0,0,0,0,0,0,0,0],
             [0,0,1,1,1,1,1,1,0,0],
-            [0,1,1,1,1,1,1,1,1,0],
+            [0,1,1,0,0,0,0,1,1,0],
+            [0,0,0,0,0,0,0,0,0,0],
             [0,0,0,0,0,0,0,0,0,0]
         ]
     },
     short_brown: {
         color: '#5a3d28',
-        grid: [
+        grid: [ // Classic messy top
             [0,0,1,1,1,1,1,1,0,0],
             [0,1,1,1,1,1,1,1,1,0],
-            [1,1,0,0,0,0,0,0,1,1]
+            [1,1,0,0,0,0,0,0,1,1],
+            [0,0,0,0,0,0,0,0,0,0],
+            [0,0,0,0,0,0,0,0,0,0]
         ]
     },
     curly_brown: {
         color: '#4a2e1b',
-        grid: [
-            [0,1,0,1,1,1,1,0,1,0],
+        grid: [ // Big and puffy
+            [0,1,1,1,1,1,1,1,1,0],
             [1,1,1,1,1,1,1,1,1,1],
-            [1,0,1,0,0,0,0,1,0,1]
+            [1,1,1,0,0,0,0,1,1,1],
+            [1,1,0,0,0,0,0,0,1,1],
+            [0,0,0,0,0,0,0,0,0,0]
         ]
     }
 };
 
 // Base Body Grid (10x10)
-// 0 = empty, 1 = outline, 2 = skin, 3 = shirt, 4 = pants
 const playerSprite = [
     [0,0,1,1,1,1,1,1,0,0],
     [0,1,2,2,2,2,2,2,1,0],
@@ -124,15 +136,15 @@ function drawPlayer(x, y) {
             
             if (colorCode === 0) continue; 
             if (colorCode === 1) ctx.fillStyle = '#000000'; // Outline
-            if (colorCode === 2) ctx.fillStyle = player.skinColor; // Custom Skin
-            if (colorCode === 3) ctx.fillStyle = player.color; // Custom Shirt
-            if (colorCode === 4) ctx.fillStyle = '#1111aa'; // Pants
+            if (colorCode === 2) ctx.fillStyle = player.skinColor; 
+            if (colorCode === 3) ctx.fillStyle = player.color; 
+            if (colorCode === 4) ctx.fillStyle = '#1111aa'; 
 
             ctx.fillRect(x + (col * pixelSize), y + (row * pixelSize), pixelSize, pixelSize);
         }
     }
 
-    // 2. Draw Hair Overlay
+    // 2. Draw Hair Overlay (Now maps over 5 rows instead of 3)
     let selectedHair = hairLayouts[player.hairType];
     ctx.fillStyle = selectedHair.color;
 
