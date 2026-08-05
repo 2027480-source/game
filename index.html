@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Web RPG</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Character Creator Menu -->
+    <div id="ui">
+        <h2>Character Creator</h2>
+        <input type="text" id="playerName" placeholder="Enter Name">
+        <br><br>
+        <label>Outfit Color: <input type="color" id="playerColor" value="#0055ff"></label>
+        <br><br>
+        <button id="startBtn">Enter World</button>
+    </div>
+
+    <!-- Heads Up Display (HUD) -->
+    <div id="hud" style="display:none;">
+        <strong><span id="hudName">Name</span></strong> | 
+        Money: $<span id="hudMoney">0</span> | 
+        Strength: <span id="hudStrength">10</span>
+    </div>
+
+    <!-- The Actual Game Screen -->
+    <canvas id="gameCanvas" width="800" height="600" style="display:none;"></canvas>
+
+    <script src="game.js"></script>
+</body>
+</html>
